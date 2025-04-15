@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Upload Your Comic – Anime Comic World</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <link href="https://unpkg.com/aos@next/dist/aos.css" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../style.css" />
+  <style>
+    body {
+      font-family: 'Orbitron', sans-serif;
+      background-color: #1e1e1e;
+      color: #f1f1f1;
+      scroll-behavior: smooth;
+      cursor: none; /* Hide default mouse cursor */
+      position: relative;
+    }
+  
+    /* Background with parallax, gradient, and dark overlay */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1;
+      background: 
+        linear-gradient(to bottom, rgba(132, 104, 104, 0.6), rgba(30, 30, 30, 0.8)),
+        url('assets/background.jpg') no-repeat center center;
+      background-size: cover;
+      background-attachment: fixed; /* Parallax effect */
+      opacity: 0.85;
+      filter: brightness(0.9) contrast(1.1);
+    }
+  
+    #anime-cursor {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 24px;
+      height: 24px;
+      background: url('https://cdn-icons-png.flaticon.com/512/1501/1501362.png') no-repeat center center;
+      background-size: contain;
+      pointer-events: none;
+      z-index: 1000;
+      transform: translate(-50%, -50%);
+      transition: transform 0.05s ease;
+    }
+  
+    body:hover #anime-cursor {
+      display: block;
+    }
+  </style>
+  
+</head>
+<body class="relative overflow-x-hidden">
+
+  <!-- Custom Cursor -->
+  <div id="anime-cursor"></div>
+
+  <!-- Navbar -->
+  <nav class="fixed top-0 w-full bg-[#1e1e1e]/70 backdrop-blur z-50 flex justify-between px-6 py-4 shadow-md">
+    <h1 class="text-xl font-bold text-white">AnimeComix</h1>
+    <ul class="flex gap-6 text-sm text-gray-300">
+      <li><a href="../index.html#home" class="hover:text-white">Home</a></li>
+      <li><a href="../index.html#comics" class="hover:text-white">Comics</a></li>
+      <li><a href="../index.html#about" class="hover:text-white">About</a></li>
+      <li><a href="../index.html#contact" class="hover:text-white">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Comic Upload Section -->
+  <section class="pt-32 px-6 pb-20 space-y-10 max-w-4xl mx-auto" data-aos="fade-up">
+    <h2 class="text-4xl font-bold text-center mb-6">Upload Your Comic Pages</h2>
+
+    <!-- File Input for Upload -->
+    <div class="text-center">
+      <input type="file" id="comic-upload" accept="image/*" class="px-4 py-2 bg-purple-500 text-white rounded-lg cursor-pointer" multiple />
+      <p class="text-gray-400 mt-4">Choose image files to upload comic pages.</p>
+    </div>
+
+    <!-- Image Preview -->
+    <div id="comic-pages" class="space-y-6 mt-6 text-center">
+      <!-- Uploaded images will appear here -->
+    </div>
+
+    <!-- Back to Comics Link -->
+    <div class="text-center mt-10">
+      <a href="../index.html#comics" class="text-purple-300 hover:underline text-lg">← Back to All Comics</a>
+    </div>
+  </section>
+
+  <script>
+    document.addEventListener('mousemove', function (e) {
+        const cursor = document.getElementById('anime-cursor');
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
+    });
+
+    // Handle file upload and image preview
+    const comicUploadInput = document.getElementById('comic-upload');
+    const comicPagesContainer = document.getElementById('comic-pages');
+
+    comicUploadInput.addEventListener('change', function (e) {
+      const files = e.target.files;
+      comicPagesContainer.innerHTML = ''; // Clear previous images if any
+
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+
+        if (file.type.startsWith('image/')) {
+          const reader = new FileReader();
+          reader.onload = function (event) {
+            const imgElement = document.createElement('img');
+            imgElement.src = event.target.result;
+            imgElement.classList.add('w-full', 'rounded-lg', 'shadow-md', 'mb-6');
+            comicPagesContainer.appendChild(imgElement);
+          };
+          reader.readAsDataURL(file);
+        } else {
+          alert('Please upload image files only.');
+        }
+      }
+    });
+  </script>
+
+  <script>
+    AOS.init();
+  </script>
+
+</body>
+</html>
