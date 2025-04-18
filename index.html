@@ -75,58 +75,157 @@
 
   <!-- Comic Upload Section -->
   <section class="pt-32 px-6 pb-20 space-y-10 max-w-4xl mx-auto" data-aos="fade-up">
-    <h2 class="text-4xl font-bold text-center mb-6">Upload Your Comic Pages</h2>
+    <h2 class="text-4xl font-bold text-center mb-6">Start Your Comic</h2>
+        <!-- Comic Name -->
+        <div class="text-center">
+            <input type="text" id="comic-title" placeholder="Enter Comic Name"
+              class="w-full max-w-md px-4 py-2 bg-gray-800 text-white border border-gray-600 rounded-lg shadow-sm">
+          </div>
+      
 
     <!-- File Input for Upload -->
     <div class="text-center">
       <input type="file" id="comic-upload" accept="image/*" class="px-4 py-2 bg-purple-500 text-white rounded-lg cursor-pointer" multiple />
-      <p class="text-gray-400 mt-4">Choose image files to upload comic pages.</p>
+      <p class="text-gray-400 mt-4"></p>
     </div>
 
     <!-- Image Preview -->
     <div id="comic-pages" class="space-y-6 mt-6 text-center">
       <!-- Uploaded images will appear here -->
     </div>
-
+        <!-- Finish Comic -->
+        <div class="text-center">
+            <button id="finish-comic"
+              class="mt-6 px-6 py-3 bg-green-600 hover:bg-green-700 text-white text-lg rounded-lg shadow-lg">Finish Comic</button>
+          </div>
+        </section>
+<!-- Download Comic JSON -->
+<div class="text-center">
+    <button id="download-comic-json"
+      class="mt-4 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white text-lg rounded-lg shadow-lg">
+      Download Comic JSON
+    </button>
+  </div>
+  
     <!-- Back to Comics Link -->
     <div class="text-center mt-10">
       <a href="../index.html#comics" class="text-purple-300 hover:underline text-lg">← Back to All Comics</a>
     </div>
   </section>
 
-  <script>
-    document.addEventListener('mousemove', function (e) {
-        const cursor = document.getElementById('anime-cursor');
-        cursor.style.left = e.clientX + 'px';
-        cursor.style.top = e.clientY + 'px';
-    });
+  <section id="create-comic" class="pt-24 pb-16 px-6 max-w-4xl mx-auto space-y-8" data-aos="fade-up">
+    <h2 class="text-3xl font-bold text-center"></h2>
+  
+  
 
-    // Handle file upload and image preview
-    const comicUploadInput = document.getElementById('comic-upload');
-    const comicPagesContainer = document.getElementById('comic-pages');
+  
+    <!-- Image Preview -->
+    <div id="page-preview" class="grid md:grid-cols-2 gap-6 mt-6">
+      <!-- Uploaded pages will be previewed here -->
+    </div>
+  
 
-    comicUploadInput.addEventListener('change', function (e) {
-      const files = e.target.files;
-      comicPagesContainer.innerHTML = ''; // Clear previous images if any
+  
 
-      for (let i = 0; i < files.length; i++) {
-        const file = files[i];
-
-        if (file.type.startsWith('image/')) {
-          const reader = new FileReader();
-          reader.onload = function (event) {
-            const imgElement = document.createElement('img');
-            imgElement.src = event.target.result;
-            imgElement.classList.add('w-full', 'rounded-lg', 'shadow-md', 'mb-6');
-            comicPagesContainer.appendChild(imgElement);
+    <script>
+        AOS.init();
+      
+        // Custom Cursor
+        document.addEventListener('mousemove', function (e) {
+          const cursor = document.getElementById('anime-cursor');
+          cursor.style.left = e.clientX + 'px';
+          cursor.style.top = e.clientY + 'px';
+        });
+      
+        // Elements
+        const comicUploadInput = document.getElementById('comic-upload');
+        const comicPagesContainer = document.getElementById('comic-pages');
+        const comicTitleInput = document.getElementById('comic-title');
+        const finishComicBtn = document.getElementById('finish-comic');
+      
+        let uploadedPages = [];
+      
+        // Image Upload + Preview
+        comicUploadInput.addEventListener('change', function (e) {
+          const files = e.target.files;
+          comicPagesContainer.innerHTML = ''; // Clear old previews
+          uploadedPages = [];
+      
+          for (let file of files) {
+            if (file.type.startsWith('image/')) {
+              const reader = new FileReader();
+              reader.onload = function (event) {
+                uploadedPages.push(event.target.result);
+                const imgElement = document.createElement('img');
+                imgElement.src = event.target.result;
+                imgElement.classList.add('w-full', 'rounded-lg', 'shadow-md', 'mb-6');
+                comicPagesContainer.appendChild(imgElement);
+              };
+              reader.readAsDataURL(file);
+            }
+          }
+        });
+      
+        // Finish Comic
+        finishComicBtn.addEventListener('click', function () {
+          const title = comicTitleInput.value.trim();
+      
+          if (!title) {
+            alert("Please enter a comic name.");
+            return;
+          }
+      
+          if (uploadedPages.length === 0) {
+            alert("Please upload at least one page.");
+            return;
+          }
+      
+          const comic = {
+            name: title,
+            pages: uploadedPages,
+            createdAt: new Date().toISOString()
           };
-          reader.readAsDataURL(file);
-        } else {
-          alert('Please upload image files only.');
-        }
-      }
-    });
-  </script>
+      
+          let savedComics = JSON.parse(localStorage.getItem('animeComics')) || {};
+          savedComics[title] = comic;
+          localStorage.setItem('animeComics', JSON.stringify(savedComics));
+      
+          alert("Comic saved successfully!");
+      
+          // Reset UI
+          comicTitleInput.value = '';
+          comicUploadInput.value = '';
+          comicPagesContainer.innerHTML = '';
+          uploadedPages = [];
+        });
+      </script>
+      <script>
+        const downloadBtn = document.getElementById('download-comic-json');
+      
+        downloadBtn.addEventListener('click', function () {
+          const savedComics = JSON.parse(localStorage.getItem('animeComics') || '{}');
+      
+          if (Object.keys(savedComics).length === 0) {
+            alert("No comics found in localStorage!");
+            return;
+          }
+      
+          const blob = new Blob([JSON.stringify(savedComics, null, 2)], { type: 'application/json' });
+      
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          
+          // You can name the file anything
+          a.download = 'my_anime_comics.json';
+      
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          URL.revokeObjectURL(url);
+        });
+      </script>
+      
 
   <script>
     AOS.init();

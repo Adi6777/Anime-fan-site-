@@ -1,0 +1,11 @@
+{
+    "My First Comic": {
+      "name": "My First Comic",
+      "pages": [
+        "data:image/jpeg;base64,...",
+        "data:image/jpeg;base64,..."
+      ],
+      "createdAt": "2025-04-15T15:23:00.123Z"
+    }
+  }
+  
