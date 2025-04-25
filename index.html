@@ -1,0 +1,51 @@
+<!-- AnimeComix Home Page -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/x-icon" href="assets/favicons/logo 32x32.png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MyManga</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="custom-bg text-white">
+
+  <div id="anime-cursor"></div>
+
+  <nav class="navbar">
+    <h1 class="logo">MyManga</h1>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="comic.html">Comics</a></li>
+      <li><a href="upload.html">Start New Comic</a></li>
+    </ul>
+  </nav>
+
+  <section class="relative text-center px-6 pt-32 max-w-4xl mx-auto">
+    <h2 class="text-5xl font-extrabold bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 text-transparent bg-clip-text animate-pulse mb-4">
+      Welcome to MyManga
+    </h2>
+    <p class="text-lg text-gray-200 leading-relaxed mb-6">
+      Dive into a world of creativity and imagination. Upload, read, and explore custom digital comics made by fans like you.
+    </p>
+    <a href="upload.html" class="inline-block px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white font-bold rounded-lg shadow-md transition transform hover:scale-105">
+      Start Your Comic Journey 🚀
+    </a>
+
+    <!-- Optional animated background icon -->
+    <img src="https://cdn-icons-png.flaticon.com/512/3468/3468534.png" alt="Comic Icon" 
+         class="absolute opacity-10 top-0 left-0 w-24 animate-spin-slow">
+  </section>
+
+  <!-- Comics Gallery Section -->
+  <section id="comics" class="comic-gallery px-6 pt-32">
+    <h2 class="text-3xl text-center mb-6 font-bold">Your Comics</h2>
+    <div id="comic-list" class="grid md:grid-cols-3 gap-6"></div>
+  </section>
+
+  <script src="index.js"></script>
+  <script src="cursor.js"></script>
+</body>
+</html>

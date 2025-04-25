@@ -1,0 +1,88 @@
+body {
+    font-family: 'Orbitron', sans-serif;
+    scroll-behavior: smooth;
+    cursor: none;
+  }
+  
+  .custom-bg {
+    background: linear-gradient(to bottom, rgba(132, 104, 104, 0.6), rgba(30, 30, 30, 0.8)),
+                url('assets/background.jpg') no-repeat center center;
+    background-size: cover;
+    background-attachment: fixed;
+    min-height: 100vh;
+    color: white;
+  }
+  
+  #anime-cursor {
+    position: fixed;
+    width: 24px;
+    height: 24px;
+    background: url('https://cdn-icons-png.flaticon.com/512/1501/1501362.png') no-repeat center center;
+    background-size: contain;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+  }
+  
+  .navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(30, 30, 30, 0.7);
+    backdrop-filter: blur(8px);
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    z-index: 50;
+  }
+  
+  .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .nav-links {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .nav-links li a {
+    color: #ccc;
+    transition: color 0.3s;
+  }
+  
+  .nav-links li a:hover {
+    color: white;
+  }
+  
+  .input-box, .file-input {
+    width: 100%;
+    padding: 0.75rem;
+    background: #222;
+    border: 1px solid #9f7aea;
+    border-radius: 0.5rem;
+    color: white;
+  }
+  
+  .btn-primary {
+    padding: 0.75rem 1.5rem;
+    background: #48bb78;
+    border: none;
+    color: white;
+    border-radius: 0.5rem;
+    font-weight: bold;
+    transition: background 0.3s;
+  }
+  
+  .btn-primary:hover {
+    background: #38a169;
+  }
+  @keyframes spin-slow {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  .animate-spin-slow {
+    animation: spin-slow 20s linear infinite;
+  }
+  

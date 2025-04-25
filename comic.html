@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/x-icon" href="assets/favicons/logo 32x32.png">
+
+  <meta charset="UTF-8">
+  <title>Upload Comic – MyManga</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="custom-bg text-white">
+
+  <div id="anime-cursor"></div>
+
+  <nav class="navbar">
+    <h1 class="logo">MyManga</h1>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="comic.html">Comics</a></li>
+    </ul>
+  </nav>
+
+  <section class="pt-32 px-6 max-w-4xl mx-auto text-center">
+    <h2 id="comic-name" class="text-3xl font-bold mb-6"></h2>
+    <div id="comic-pages-container">
+      <img id="comic-page" class="mx-auto rounded shadow-lg max-h-[70vh]" />
+    </div>
+    <div class="flex justify-center items-center gap-4 mt-6">
+      <button id="prev-page" class="btn-primary">Previous</button>
+      <span id="page-indicator" class="text-lg"></span>
+      <button id="next-page" class="btn-primary">Next</button>
+    </div>
+    <div class="flex justify-center gap-4 mt-8">
+      <button id="rename-comic" class="btn-primary bg-purple-600 hover:bg-purple-700">Rename</button>
+      
+        
+      </button>
+      
+    </div>
+  </section>
+  
+  
+  
+
+  <script src="comic.js"></script>
+  <script src="cursor.js"></script>
+</body>
+</html>

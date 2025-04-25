@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/x-icon" href="assets/favicons/logo 32x32.png">
+  <meta charset="UTF-8">
+  <title>Upload Comic – MyManga</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="custom-bg text-white">
+
+  <div id="anime-cursor"></div>
+
+  <nav class="navbar">
+    <h1 class="logo">MyManga</h1>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="comic.html">Comics</a></li>
+    </ul>
+  </nav>
+
+  <section class="px-6 pt-32 max-w-4xl mx-auto">
+    <input type="text" id="comic-title" placeholder="Enter Comic Title" class="input-box mb-4">
+    <input type="file" id="comic-upload" accept="image/*" multiple class="file-input mb-6">
+    <div id="comic-preview" class="space-y-4"></div>
+    <button id="finish-comic" class="btn-primary">Finish Comic</button>
+  </section>
+
+  <section id="comics" class="comic-gallery px-6 pt-32">
+    <h2 class="text-2xl text-center mb-6 font-bold">figuring out how ???</h2>
+    <p class="text-med text-white text-center leading-relaxed mb-6"> 
+      Create Story Images: Use an AI image generator to create visuals that match your completed anime story.
+      Add Text to Images: Incorporate the story's text onto the images in a way that is visually appealing, simple, and easy to read.
+      Organize Images: Arrange the images in the correct order according to your story's sequence.
+      Upload Images: Upload all the prepared images to your website. If you want to delete any comic which you have uploaded drop a main on MyManga@gmail.com
+    </p>
+    <div id="comic-list" class="grid md:grid-cols-3 gap-6"></div>
+  </section>
+  <script src="upload.js"></script>
+  <script src="cursor.js"></script>
+
+</body>
+</html>
